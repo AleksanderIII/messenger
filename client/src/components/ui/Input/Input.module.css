@@ -1,0 +1,31 @@
+.input {
+  animation: borderColorChange 3s infinite;
+  border: 1px solid;
+  display: block;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 4px;
+  width: 100%;
+  min-height: 30px;
+  height: 80%;
+  resize: none;
+  border-radius: 0;
+}
+
+@keyframes borderColorChange {
+  0% {
+    border-color: rgb(194, 237, 249);
+  }
+  25% {
+    border-color: rgb(36, 162, 197);
+  }
+  50% {
+    border-color: rgb(2, 55, 69);
+  }
+  75% {
+    border-color: rgb(36, 162, 197);
+  }
+  100% {
+    border-color: rgb(194, 237, 249);
+  }
+}
