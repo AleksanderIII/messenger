@@ -1,0 +1,22 @@
+.messages_wrapper {
+  overflow-y: auto;
+  height: 70vh;
+  border: 1px solid rgb(194, 237, 249);
+}
+
+.row {
+  position: relative;
+  text-align: left;
+  border: 1px solid rgb(194, 237, 249);
+  border-radius: 0.5rem;
+  padding: 0.375rem;
+  padding-bottom: 0.75rem;
+  margin: 0.375rem;
+}
+
+.row_timestamp {
+  position: absolute;
+  font-size: 0.625rem;
+  right: 0.25rem;
+  bottom: 0.125rem;
+}
