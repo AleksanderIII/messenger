@@ -1,12 +1,15 @@
 import express, { Request, Response } from 'express';
 import http from 'http';
 import { WebSocketServer } from 'ws';
+import cors from 'cors';
 
 import WebSocketController from './controllers/WebSocketController';
 import messagesRoutes from './routes/messages';
 
 const app = express();
 const port = 3000;
+
+app.use(cors());
 
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
@@ -23,6 +26,6 @@ app.use((req: Request, res: Response) => {
   });
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
