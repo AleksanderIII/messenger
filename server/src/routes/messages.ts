@@ -1,14 +1,24 @@
 import { Router, Request, Response } from 'express';
 
+import MessageStore from '../models/MessagesStore';
+import MessageService from '../services/MessagesService';
+
 const router = Router();
 
-router.get('/messages', (req: Request, res: Response) => {
-  res.status(201).json('hello world. Get method');
+const messageStore = new MessageStore();
+const messageService = new MessageService(messageStore);
+
+router.get('/', (req: Request, res: Response) => {
+  res.json(messageService.getMessages());
 });
 
-router.post('/messages', (req: Request, res: Response) => {
-  console.log(req.body.message);
-  res.status(201).json('hello world. Post method');
+router.post('/', (req: Request, res: Response) => {
+  const { message } = req.body;
+
+  messageService.addMessage(message);
+  res
+    .status(201)
+    .json({ success: true, message: 'Message added successfully' });
 });
 
 export default router;
