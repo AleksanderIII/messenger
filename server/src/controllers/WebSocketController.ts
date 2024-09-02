@@ -3,6 +3,7 @@ import { WebSocket } from 'ws';
 class WebSocketController {
   public static handleConnection(ws: WebSocket) {
     console.log('Connected');
+    ws.send('Hello World wss');
 
     ws.on('message', (message) => {
       console.log('Received message:', message);
