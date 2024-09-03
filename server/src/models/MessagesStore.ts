@@ -1,15 +1,17 @@
+import { IMessage } from '../types';
+
 class MessageStore {
-  private messages: string[] = [];
+  private messages: IMessage[] = [];
   private MAX_MESSAGES = 9;
 
-  public addMessage(message: string) {
+  public addMessage(message: IMessage) {
     if (this.messages.length >= this.MAX_MESSAGES) {
       this.messages.shift();
     }
     this.messages.push(message);
   }
 
-  public getMessages(): string[] {
+  public getMessages(): IMessage[] {
     return this.messages;
   }
 }
