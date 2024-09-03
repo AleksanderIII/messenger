@@ -2,11 +2,13 @@ import { Router, Request, Response } from 'express';
 
 import MessageStore from '../models/MessagesStore';
 import MessageService from '../services/MessagesService';
+import WebSocketController from '../controllers/WebSocketController';
 
 const router = Router();
 
 const messageStore = new MessageStore();
-const messageService = new MessageService(messageStore);
+const webSocketController = new WebSocketController();
+const messageService = new MessageService(messageStore, webSocketController);
 
 router.get('/', (req: Request, res: Response) => {
   const messages = messageService.getMessages();

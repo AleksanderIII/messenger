@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import ChatMessages from './messages/ChatMessages';
@@ -18,14 +19,30 @@ const Chat = () => {
   } = useQuery<IMessage[]>({
     queryKey: ['messages'],
     queryFn: fetchMessages,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchInterval: false,
   });
 
   const mutation = useMutation({
     mutationFn: createMessage,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['messages'] });
-    },
   });
+
+  useEffect(() => {
+    const ws = new WebSocket('ws://localhost:3000');
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === 'UPDATE_MESSAGES') {
+        queryClient.setQueryData(['messages'], data.messages);
+      }
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, [queryClient]);
 
   const handleSendMessage = (newMessage: string) => {
     mutation.mutate({ text: newMessage, timeStamp: new Date() });
