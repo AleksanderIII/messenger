@@ -27,7 +27,6 @@ class WebSocketController implements IWebSocketController {
 
   public broadcastMessages(messages: IMessage[]) {
     const data = JSON.stringify({ type: 'UPDATE_MESSAGES', messages });
-    console.log('Broadcasting messages:', data);
 
     WebSocketController.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {

@@ -1,12 +1,12 @@
 import { IWebSocketController } from '../controllers/WebSocketController';
-import MessageStore from '../models/MessagesStore';
+import { IMessageStore } from '../models/MessagesStore';
 import { IMessage } from '../types';
 
 class MessageService {
-  private store: MessageStore;
+  private store: IMessageStore;
   private webSocketController: IWebSocketController;
 
-  constructor(store: MessageStore, webSocketController: IWebSocketController) {
+  constructor(store: IMessageStore, webSocketController: IWebSocketController) {
     this.store = store;
     this.webSocketController = webSocketController;
   }
