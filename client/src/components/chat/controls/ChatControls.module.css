@@ -1,12 +1,13 @@
 .chat_controls {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 20vh;
 }
 
 .message_input {
-  width: 70%;
+  width: 100%;
 }
 
 .submit_button {

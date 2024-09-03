@@ -9,13 +9,14 @@ const messageStore = new MessageStore();
 const messageService = new MessageService(messageStore);
 
 router.get('/', (req: Request, res: Response) => {
-  res.json(messageService.getMessages());
+  const messages = messageService.getMessages();
+  res.json(messages);
 });
 
 router.post('/', (req: Request, res: Response) => {
-  const { message } = req.body;
+  const { text, timeStamp } = req.body;
 
-  messageService.addMessage(message);
+  messageService.addMessage({ text, timeStamp });
   res
     .status(201)
     .json({ success: true, message: 'Message added successfully' });

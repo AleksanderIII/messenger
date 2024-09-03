@@ -19,13 +19,33 @@ const ChatMessages = ({ messages }: IChatMessagesProps) => {
     <div className={styles.messages_wrapper}>
       {messages.length ? (
         <>
-          {messages.map((message) => (
-            <div className={styles.row} key={message.timeStamp.toDateString()}>
-              <p>{message.text}</p>
-              <p className={styles.row_timestamp}>
-                {message.timeStamp.toLocaleTimeString()}
-              </p>
-            </div>
+          {messages.map((message, index) => (
+            <>
+              {index === 0 ||
+              new Date(messages[index - 1].timeStamp).getDate() !==
+                new Date(message.timeStamp).getDate() ? (
+                <p>
+                  {new Date(message.timeStamp).toLocaleDateString([], {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+              ) : null}
+              <div
+                className={styles.row}
+                key={new Date(message.timeStamp).toDateString()}
+              >
+                <p>{message.text}</p>
+                <p className={styles.row_timestamp}>
+                  {new Date(message.timeStamp).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                  })}
+                </p>
+              </div>
+            </>
           ))}
         </>
       ) : (

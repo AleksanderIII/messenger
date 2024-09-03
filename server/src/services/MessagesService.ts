@@ -1,4 +1,5 @@
 import MessageStore from '../models/MessagesStore';
+import { IMessage } from '../types';
 
 class MessageService {
   private store: MessageStore;
@@ -7,11 +8,11 @@ class MessageService {
     this.store = store;
   }
 
-  public addMessage(message: string) {
+  public addMessage(message: IMessage) {
     this.store.addMessage(message);
   }
 
-  public getMessages(): string[] {
+  public getMessages(): IMessage[] {
     return this.store.getMessages();
   }
 }
