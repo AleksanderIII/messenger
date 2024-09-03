@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 
 import { IMessage } from '../../../models';
 
@@ -20,7 +20,7 @@ const ChatMessages = ({ messages }: IChatMessagesProps) => {
       {messages.length ? (
         <>
           {messages.map((message, index) => (
-            <>
+            <Fragment key={message.id}>
               {index === 0 ||
               new Date(messages[index - 1].timeStamp).getDate() !==
                 new Date(message.timeStamp).getDate() ? (
@@ -32,10 +32,7 @@ const ChatMessages = ({ messages }: IChatMessagesProps) => {
                   })}
                 </p>
               ) : null}
-              <div
-                className={styles.row}
-                key={new Date(message.timeStamp).toDateString()}
-              >
+              <div className={styles.row}>
                 <p>{message.text}</p>
                 <p className={styles.row_timestamp}>
                   {new Date(message.timeStamp).toLocaleTimeString([], {
@@ -45,7 +42,7 @@ const ChatMessages = ({ messages }: IChatMessagesProps) => {
                   })}
                 </p>
               </div>
-            </>
+            </Fragment>
           ))}
         </>
       ) : (
