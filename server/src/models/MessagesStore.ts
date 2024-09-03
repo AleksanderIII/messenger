@@ -1,6 +1,11 @@
 import { IMessage } from '../types';
 
-class MessageStore {
+export interface IMessageStore {
+  addMessage(message: IMessage): void;
+  getMessages(): IMessage[];
+}
+
+class MessageStore implements IMessageStore {
   private messages: IMessage[] = [];
   private MAX_MESSAGES = 9;
 
