@@ -8,7 +8,9 @@ export async function fetchMessages(): Promise<IMessage[]> {
   return response.json();
 }
 
-export async function createMessage(newMessage: IMessage): Promise<IMessage> {
+export async function createMessage(
+  newMessage: Omit<IMessage, 'id'>
+): Promise<{ message: string; success: boolean }> {
   const response = await fetch('http://localhost:3000/messages', {
     method: 'POST',
     headers: {

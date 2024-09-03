@@ -11,7 +11,7 @@ class MessageService {
     this.webSocketController = webSocketController;
   }
 
-  public addMessage(message: IMessage) {
+  public addMessage(message: Omit<IMessage, 'id'>) {
     this.store.addMessage(message);
     this.webSocketController.broadcastMessages(this.store.getMessages());
   }
